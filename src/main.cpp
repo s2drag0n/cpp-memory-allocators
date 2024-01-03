@@ -1,5 +1,7 @@
 #include "../includes/Benchmark.h"
+#include "../includes/CAllocator.h"
 #include "../includes/LinearAllocator.h"
+#include "../includes/StackAllocator.h"
 #include <cstddef>
 #include <iostream>
 
@@ -12,12 +14,26 @@ int main() {
     const std::vector<std::size_t> ALIGNMENTS{8, 8, 8, 8, 8, 8, 8};
 
     Allocator *linearAllocator = new LinearAllocator(A);
+    Allocator *cAllocator = new CAllocator();
+    Allocator *stackAllocator = new StackAllocator(A);
 
     Benchmark benchmark(OPERATIONS);
+
+    std::cout << "C" << std::endl;
+    benchmark.MultipleAllocation(cAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.MultipleFree(cAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.RandomAllocation(cAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.RandomFree(cAllocator, ALLOCATION_SIZES, ALIGNMENTS);
 
     std::cout << "LINEAR" << std::endl;
     benchmark.MultipleAllocation(linearAllocator, ALLOCATION_SIZES, ALIGNMENTS);
     benchmark.RandomAllocation(linearAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+
+    std::cout << "STACK" << std::endl;
+    benchmark.MultipleAllocation(stackAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.MultipleFree(stackAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.RandomAllocation(stackAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.RandomFree(stackAllocator, ALLOCATION_SIZES, ALIGNMENTS);
 
     delete linearAllocator;
 

@@ -31,7 +31,7 @@ void Benchmark::SingleAllocation(Allocator *allocator, const std::size_t size,
 
 void Benchmark::SingleFree(Allocator *allocator, const std::size_t size,
                            const std::size_t alignment) {
-    std::cout << "BENCHMARK: ALLOCATION" << IO::endl;
+    std::cout << "BENCHMARK: ALLOCATION/FREE" << IO::endl;
     std::cout << "\tSize     \t" << size << IO::endl;
     std::cout << "\tAlignment\t" << alignment << IO::endl;
 
@@ -85,7 +85,7 @@ void Benchmark::RandomAllocation(
     const std::vector<std::size_t> &alignments) {
     srand(1);
 
-    std::cout << "\tBENCHMARK: ALLOCATION" << IO::endl;
+    std::cout << "RANDOM BENCHMARK: ALLOCATION" << IO::endl;
 
     StartRound();
 
@@ -116,7 +116,7 @@ void Benchmark::RandomFree(Allocator *allocator,
                            const std::vector<std::size_t> &alignments) {
     srand(1);
 
-    std::cout << "\tBENCHMARK: ALLOCATION/FREE" << IO::endl;
+    std::cout << "RANDOM BENCHMARK: ALLOCATION/FREE" << IO::endl;
 
     StartRound();
 

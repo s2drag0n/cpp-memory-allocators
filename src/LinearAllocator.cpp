@@ -27,7 +27,7 @@ void *LinearAllocator::Allocate(const std::size_t size,
     std::size_t paddingAddress = 0;
     const std::size_t currentAddress = (std::size_t)m_start_ptr + m_offset;
 
-    if (alignment != 0 && m_offset % alignment != 0) {
+    if (alignment != 0 && currentAddress % alignment != 0) {
         // Alignment is required.
         // Find the next aligned memeory address ans update offset
         padding = Utils::CalculatePadding(currentAddress, alignment);

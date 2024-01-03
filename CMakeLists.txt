@@ -2,9 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 project(memory-allocators LANGUAGES CXX)
 
 set(SOURCES
-    # src/CAllocator.cpp
-    src/LinearAllocator.cpp
-    # src/StackAllocator src/PoolAllocator src/FreeListAllocator.cpp
+    src/CAllocator.cpp src/LinearAllocator.cpp src/StackAllocator
+    # src/PoolAllocator src/FreeListAllocator.cpp
     src/Benchmark.cpp src/main.cpp)
 
 add_executable(main ${SOURCES})
