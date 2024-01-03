@@ -17,9 +17,7 @@ int main() {
 
     std::cout << "LINEAR" << std::endl;
     benchmark.MultipleAllocation(linearAllocator, ALLOCATION_SIZES, ALIGNMENTS);
-    benchmark.MultipleFree(linearAllocator, ALLOCATION_SIZES, ALIGNMENTS);
     benchmark.RandomAllocation(linearAllocator, ALLOCATION_SIZES, ALIGNMENTS);
-    benchmark.RandomFree(linearAllocator, ALLOCATION_SIZES, ALIGNMENTS);
 
     delete linearAllocator;
 
