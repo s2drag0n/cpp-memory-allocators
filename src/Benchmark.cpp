@@ -155,7 +155,7 @@ void Benchmark::PrintResult(const BenchmarkResults &results) const {
               << IO::endl;
     std::cout << "\t\tOp per sec: \t" << results.OperationsPerSec << IO::endl;
     std::cout << "\t\tTime per op: \t" << results.TimePerOperation << IO::endl;
-    std::cout << "\t\tMemory peal: \t" << results.MemoryPeak << IO::endl;
+    std::cout << "\t\tMemory peak: \t" << results.MemoryPeak << IO::endl;
 
     std::cout << IO::endl;
 }

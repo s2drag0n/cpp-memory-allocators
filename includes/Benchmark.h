@@ -9,7 +9,7 @@
 #if 0
 #define OPERATIONS (m_nOperations)
 #else
-#define OPERATIONS (10)
+#define OPERATIONS (100000)
 #endif
 
 struct BenchmarkResults {

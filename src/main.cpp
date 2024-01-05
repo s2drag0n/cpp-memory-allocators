@@ -1,6 +1,8 @@
 #include "../includes/Benchmark.h"
 #include "../includes/CAllocator.h"
+#include "../includes/FreeListAllocator.h"
 #include "../includes/LinearAllocator.h"
+#include "../includes/PoolAllocator.h"
 #include "../includes/StackAllocator.h"
 #include <cstddef>
 #include <iostream>
@@ -16,6 +18,9 @@ int main() {
     Allocator *linearAllocator = new LinearAllocator(A);
     Allocator *cAllocator = new CAllocator();
     Allocator *stackAllocator = new StackAllocator(A);
+    Allocator *poolAllocator = new PoolAllocator(16777216, 4096);
+    Allocator *freeListAllocator = new FreeListAllocator(
+        B, FreeListAllocator::PlacementPolicy::FIND_FIRST);
 
     Benchmark benchmark(OPERATIONS);
 
@@ -35,7 +40,22 @@ int main() {
     benchmark.RandomAllocation(stackAllocator, ALLOCATION_SIZES, ALIGNMENTS);
     benchmark.RandomFree(stackAllocator, ALLOCATION_SIZES, ALIGNMENTS);
 
+    std::cout << "POOL" << std::endl;
+    benchmark.SingleAllocation(poolAllocator, 4096, 8);
+    benchmark.SingleFree(poolAllocator, 4096, 8);
+
+    std::cout << "FREE LIST" << std::endl;
+    benchmark.MultipleAllocation(freeListAllocator, ALLOCATION_SIZES,
+                                 ALIGNMENTS);
+    benchmark.MultipleFree(freeListAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.RandomAllocation(freeListAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+    benchmark.RandomFree(freeListAllocator, ALLOCATION_SIZES, ALIGNMENTS);
+
+    delete cAllocator;
     delete linearAllocator;
+    delete stackAllocator;
+    delete poolAllocator;
+    delete freeListAllocator;
 
     return 1;
 }
